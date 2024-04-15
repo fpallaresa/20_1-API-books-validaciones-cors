@@ -90,7 +90,7 @@ router.put("/:id", async (req, res) => {
   res.set("Access-Control-Allow-Origin", "http://localhost:3000");
   try {
     const id = req.params.id;
-    const bookUpdated = await Book.findByIdAndUpdate(id, req.body, { new: true });
+    const bookUpdated = await Book.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
     if (bookUpdated) {
       res.json(bookUpdated);
     } else {
