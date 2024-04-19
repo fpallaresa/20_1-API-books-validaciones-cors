@@ -14,7 +14,7 @@ const bookNormalization = async () => {
     // Podríamos incluso eliminar datos que no sean correctos
     for (let i = 0; i < books.length; i++) {
       const book = books[i];
-      book.publisherCountry = book.publisherCountry.toUpperCase();
+      book.publisher.country = book.publisher.country.toUpperCase();
       await book.save();
 
       console.log(`Modificado libro ${book.title}`);

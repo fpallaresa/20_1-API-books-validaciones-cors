@@ -21,21 +21,27 @@ const bookSchema = new Schema(
     pages: {
       type: Number,
       required: false,
-      minLength: [1, "Una página no es un libro, es un haiku"],
-      maxLength: [1000, "Si un libro tiene más de 1.000 páginas es imposible de leer"],
+      min: [1, "Una página no es un libro, es un haiku"],
+      max: [1000, "Si un libro tiene más de 1.000 páginas es imposible de leer"],
     },
     publisher: {
-      type: String,
+      type: {
+        name: {
+          type: String,
+          required: false,
+          minLength: [3, "Demasiado corto para una editorial... escribe al menos 3 caracteres"],
+          maxLength: [20, "Demasiado largo para una editorial... escribe 20 o menos caracteres"],
+          trim: true,
+        },
+        country: {
+          type: String,
+          required: false,
+          enum: allowedCountries,
+          uppercase: true,
+          trim: true,
+        },
+      },
       required: false,
-      minLength: [3, "Demasiado corto para una editorial... escribe al menos 3 caracteres"],
-      maxLength: [20, "Demasiado largo para una editorial... escribe 20 o menos caracteres"],
-      trim: true,
-    },
-    publisherCountry: {
-      type: String,
-      required: false,
-      enum: allowedCountries,
-      trim: true,
     },
   },
   {
